@@ -3,6 +3,9 @@ import "./globals.css";
 import { Barlow } from "next/font/google";
 import Context from "@/context/context";
 import Navbar from "@/components/ui/Navbar";
+import { ProductProvider } from "@/context/ProductsContext";
+import { CartProvider } from "@/context/CartContext";
+import { AuthProvider } from "@/context/AuthContext";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -28,7 +31,11 @@ export default function RootLayout({ children }) {
     <html lang="en">
       {/*  ${geistSans.variable} ${geistMono.variable} font remove */}
       <body className={` ${barlow.className} antialiased`}>
-        <Context>{children}</Context>
+        <AuthProvider>
+          <ProductProvider>
+            <CartProvider>{children}</CartProvider>
+          </ProductProvider>
+        </AuthProvider>
       </body>
     </html>
   );
