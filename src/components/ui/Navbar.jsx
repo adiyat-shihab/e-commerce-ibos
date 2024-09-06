@@ -1,6 +1,19 @@
-import { ShoppingCart } from "lucide-react";
+"use client";
+import { LogOut, ShoppingCart } from "lucide-react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { useAuth } from "@/context/AuthContext";
+import Image from "next/image";
+import { useProducts } from "@/context/ProductsContext";
 
 const Navbar = () => {
+  const { logOut } = useAuth();
+
   return (
     <div className="flex items-center justify-between p-4 bg-white">
       <div className="flex items-center">
@@ -17,8 +30,27 @@ const Navbar = () => {
         <a href="#">Blog</a>
       </div>
       <div className="flex items-center space-x-4">
-        <ShoppingCart className="text-gray-600" />
-        <div className="w-8 h-8 bg-gray-300 rounded-full"></div>
+        <Image
+          src={"/cartBlack.svg"}
+          width={30}
+          height={30}
+          alt={"cart "}
+          className="text-gray-600"
+        />
+        <DropdownMenu>
+          <DropdownMenuTrigger>
+            <Avatar className={"cursor-pointer"}>
+              <AvatarImage src="https://github.com/shadcn.png" />
+              <AvatarFallback>CN</AvatarFallback>
+            </Avatar>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent>
+            <DropdownMenuItem className={"cursor-pointer"} onClick={logOut}>
+              <LogOut className="mr-2 h-4 w-4" />
+              <span>Log out</span>
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
     </div>
   );

@@ -5,15 +5,17 @@ import {
   getAuth,
   signInWithEmailAndPassword,
   onAuthStateChanged,
+  signOut,
 } from "firebase/auth";
 import app from "@/firebase/config";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 const AuthContext = createContext(undefined);
 const auth = getAuth(app);
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const router = useRouter();
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -30,7 +32,9 @@ export const AuthProvider = ({ children }) => {
     let error = null;
     try {
       const result = await signInWithEmailAndPassword(auth, email, password);
-      console.log(result);
+      if (result.user) {
+        router.push("/dashboard");
+      }
     } catch (e) {
       error = e;
     }
@@ -49,8 +53,11 @@ export const AuthProvider = ({ children }) => {
       error = e;
     }
   };
+  const logOut = async () => {
+    await signOut(auth).then(() => router.push("/authentication/register"));
+  };
   return (
-    <AuthContext.Provider value={{ user, login, register }}>
+    <AuthContext.Provider value={{ user, login, register, logOut }}>
       {children}
     </AuthContext.Provider>
   );
