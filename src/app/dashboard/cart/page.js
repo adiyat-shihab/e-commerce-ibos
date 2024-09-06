@@ -32,7 +32,7 @@ const Page = () => {
   };
 
   return (
-    <div className="container px-[7.5rem]  p-4 mx-auto mb-48">
+    <div className="container lg:px-[7.5rem]  p-4 mx-auto mb-48">
       <div className="flex md:justify-between flex-col md:flex-row gap-8">
         {cart.length !== 0 ? (
           <div className="flex-1">
@@ -79,7 +79,7 @@ const Page = () => {
                   <img
                     src={item.imageUrl}
                     alt={item.name}
-                    className="w-20 h-20 object-cover"
+                    className="lg:w-20 w-10 h-10 lg:h-20 object-cover"
                   />
                   <div className="flex-1">
                     <h3 className="font-semibold">{item.name}</h3>

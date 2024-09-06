@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { useCart } from "@/context/CartContext";
 
 export const Sidebar = () => (
-  <div className=" p-4 border-r h-screen">
+  <div className=" p-4 border-r lg:h-screen">
     <ul className="space-y-2 text-[#717171]  cursor-pointer font-medium text-lg">
       <li className=" hover:bg-black hover:rounded-lg hover:text-white py-3  px-6 cursor-pointer">
         Rocking chair
