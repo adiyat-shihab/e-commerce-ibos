@@ -1,5 +1,6 @@
 [
   {
+    "id": 1,
     "name": "Recliner Chair Wood",
     "price": "299.00",
     "originalPrice": "350.00",
@@ -8,6 +9,7 @@
     "imageUrl": "/image 1.png"
   },
   {
+    "id": 2,
     "name": "Timber Ride Padded",
     "price": "59.00",
     "originalPrice": "75.00",
@@ -16,6 +18,7 @@
     "imageUrl": "/image 2.png"
   },
   {
+    "id": 3,
     "name": "Colored Wooden Chair",
     "price": "299.00",
     "originalPrice": "350.00",
@@ -24,6 +27,7 @@
     "imageUrl": "/image 3.png"
   },
   {
+    "id": 4,
     "name": "Blank Bamboo Wicker",
     "price": "299.00",
     "originalPrice": "350.00",
@@ -32,6 +36,7 @@
     "imageUrl": "/image 4.png"
   },
   {
+    "id": 5,
     "name": "Isolated Wooden Rock",
     "price": "185.00",
     "originalPrice": "400.00",
@@ -40,6 +45,7 @@
     "imageUrl": "/image 5.png"
   },
   {
+    "id": 6,
     "name": "Minimal Empty Rocking",
     "price": "299.00",
     "originalPrice": "350.00",
