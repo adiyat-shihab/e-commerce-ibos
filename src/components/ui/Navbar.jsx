@@ -10,12 +10,14 @@ import {
 import { useAuth } from "@/context/AuthContext";
 import Image from "next/image";
 import { useProducts } from "@/context/ProductsContext";
+import { useCart } from "@/context/CartContext";
+import Link from "next/link";
 
 const Navbar = () => {
   const { logOut } = useAuth();
-
+  const { cart } = useCart();
   return (
-    <div className="flex items-center justify-between p-4 bg-white border-b py-6">
+    <div className="flex items-center px-[7.5rem] justify-between p-4 bg-white border-b py-6">
       <div className="flex items-center">
         <div className="bg-blue-500 text-white rounded-full p-2 mr-2">
           <span className="text-xl font-bold">F</span>
@@ -23,20 +25,25 @@ const Navbar = () => {
         <span className="text-xl font-bold">FurniFlex</span>
       </div>
       <div className="hidden md:flex space-x-4 text-black hover:text-gray-900 text-xl gap-12 font-medium">
-        <a href="#">Home</a>
-        <a href="#">Products</a>
+        <Link href={"/dashboard"}>Home</Link>
+        <Link href={"/dashboard"}>Products</Link>
         <a href="#">Categories</a>
         <a href="#">Custom</a>
         <a href="#">Blog</a>
       </div>
       <div className="flex items-center space-x-4">
-        <Image
-          src={"/cartBlack.svg"}
-          width={30}
-          height={30}
-          alt={"cart "}
-          className="text-gray-600"
-        />
+        <Link href={"/dashboard/cart"} className={"relative"}>
+          <Image
+            src={"/cartBlack.svg"}
+            width={37}
+            height={37}
+            alt={"cart "}
+            className="text-gray-600"
+          />
+          <span className="absolute font-bold bg-black text-[0.7rem] text-white rounded-full py-1 px-[0.6rem] left-4 -bottom-2">
+            {cart.length}
+          </span>
+        </Link>
         <DropdownMenu>
           <DropdownMenuTrigger>
             <Avatar className={"cursor-pointer"}>
