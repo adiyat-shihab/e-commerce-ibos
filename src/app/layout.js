@@ -1,9 +1,9 @@
-"use client";
 import "./globals.css";
 import { Barlow } from "next/font/google";
 import { ProductProvider } from "@/context/ProductsContext";
 import { CartProvider } from "@/context/CartContext";
 import { AuthProvider } from "@/context/AuthContext";
+import Context from "@/context/context";
 
 const barlow = Barlow({
   subsets: ["latin"],
@@ -15,11 +15,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       {/*  ${geistSans.variable} ${geistMono.variable} font remove */}
       <body className={` ${barlow.className} antialiased`}>
-        <AuthProvider>
-          <ProductProvider>
-            <CartProvider>{children}</CartProvider>
-          </ProductProvider>
-        </AuthProvider>
+        <Context>{children}</Context>
       </body>
     </html>
   );

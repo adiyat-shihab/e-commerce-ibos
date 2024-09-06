@@ -2,16 +2,47 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
 const CartContext = createContext(undefined);
+const CART_STORAGE_KEY = "cart";
+
+const getStoredCart = () => {
+  if (typeof window !== "undefined") {
+    try {
+      const storedCart = localStorage.getItem(CART_STORAGE_KEY);
+      return storedCart ? JSON.parse(storedCart) : [];
+    } catch (error) {
+      console.error("Failed to parse stored cart:", error);
+      return [];
+    }
+  }
+  return [];
+};
+
+const storeCart = (cart) => {
+  if (typeof window !== "undefined") {
+    try {
+      localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
+    } catch (error) {
+      console.error("Failed to store cart:", error);
+    }
+  }
+};
 
 export const CartProvider = ({ children }) => {
-  // const [cart, setCart] = useState(() => {
-  //   const savedCart = localStorage.getItem("cart");
-  //   return savedCart ? JSON.parse(savedCart) : [];
-  // });
   const [cart, setCart] = useState([]);
+  const [isLoaded, setIsLoaded] = useState(false);
+
   useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(cart));
-  }, [cart]);
+    const loadedCart = getStoredCart();
+    setCart(loadedCart);
+    setIsLoaded(true);
+  }, []);
+
+  useEffect(() => {
+    if (isLoaded) {
+      storeCart(cart);
+    }
+  }, [cart, isLoaded]);
+
   const addToCart = (product) => {
     setCart((prevCart) => {
       const existingItem = prevCart.find((item) => item.id === product.id);
