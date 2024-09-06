@@ -12,7 +12,7 @@ const Page = () => {
     console.log(email, password);
     await register(email, password);
     if (user) {
-      await router.push("/");
+      await router.push("/dashboard");
     }
   };
   return (
